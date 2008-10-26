@@ -6,7 +6,7 @@ app = Nyane.new do
   end
   
   get "/hello" do
-    "Hello, hello, hello!"
+    render :hello
   end
   
   get "/bye" do
