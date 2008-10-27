@@ -9,15 +9,30 @@ class Nyane
     @actions << [route, block]
   end
   
-  def render(template)
-    require 'erb'
-    path = File.join(".", "/views","/#{template.to_s}.erb")
+  def erb(template)
+    begin
+      require 'erubis'
+      require 'erb'
+    rescue LoadError
+      next
+    end
+    
+    path = build_template_path(template, :erb)
     if File.exists?(path)
-      content = ERB.new(File.read(path)).src
-      render_success(eval(content))
+      if Erubis
+        content = Erubis::Eruby.new(File.read(path)).src
+      else
+        content = ERB.new(File.read(path)).src
+      end
+      
+      render_success eval(content)
     else
       render_error 500, "Template not found"
     end
+  end
+  
+  def build_template_path(name, renderer)
+    File.join(".", "/views","/#{name.to_s}.#{renderer.to_s}")
   end
   
   def render_success(body,status_code=200,content_type='text/html')

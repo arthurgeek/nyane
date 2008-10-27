@@ -6,11 +6,12 @@ app = Nyane.new do
   end
   
   get "/hello" do
-    render :hello
+    @now = Time.now
+    erb :hello
   end
   
   get "/bye" do
-    "Goodbye!"
+    "Goodbye"
   end
 end
 
