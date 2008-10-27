@@ -13,6 +13,15 @@ app = Nyane.new do
   get "/bye" do
     "Goodbye"
   end
+  
+  get "/echo/(.*)" do |text|
+    "#{text}"
+  end
+  
+  get "/say/(.*)/to/(.*)" do |message, person|
+    "#{message} #{person}"
+  end
+  
 end
 
 run app

@@ -43,11 +43,12 @@ class Nyane
     [error_code, {'Content-type' => 'text/plain'}, error_message]
   end
   
-  def call(env)    
-    action = @actions.detect { |route, block| env["PATH_INFO"].match(Regexp.new("^#{route}$")) }
+  def call(env)
+    params = nil
+    action = @actions.detect { |route, block| params = env["PATH_INFO"].match(Regexp.new("^#{route}$")) }
     
     if action
-      result = action.last.call
+      result = action.last.call *params[1..-1]
       if result.is_a?(String)
         render_success result
       else
