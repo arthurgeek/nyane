@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.date = "Wed Oct 27 22:21:40 -0300 2008"
+  s.date = "Wed Oct 28 02:21:17 -0300 2008"
   s.authors = ["Arthur Zapparoli"]
   s.require_paths = ["lib"]
   s.required_rubygems_version = ">= 0"
