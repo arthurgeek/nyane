@@ -5,13 +5,13 @@ app = Nyane.new do
     "Hello!"
   end
   
-  get "/hello" do
-    @now = Time.now
-    erb :hello
-  end
-  
   get "/bye" do
     "Goodbye"
+  end
+  
+  get "/time" do
+    @now = Time.now
+    erb :time
   end
   
   get "/echo/(.*)" do |text|
