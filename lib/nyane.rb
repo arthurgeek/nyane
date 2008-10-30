@@ -12,9 +12,8 @@ class Nyane
   def erb(template)
     begin
       require 'erubis'
-      require 'erb'
     rescue LoadError
-      next
+      require 'erb'
     end
     
     path = build_template_path(template, :erb)
