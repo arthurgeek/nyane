@@ -1,4 +1,7 @@
+$:.unshift File.dirname(__FILE__) + "/../lib"
+
 require "nyane"
+require "nyane/erb"
 
 app = Nyane.new do
   get "/" do

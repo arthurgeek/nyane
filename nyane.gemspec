@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
  "LICENSE",
  "README.markdown",
  "lib/nyane.rb",
+ "lib/nyane/erb.rb",
  "demo/example.ru",
  "demo/views/time.erb"]
   s.email = ["arthurzap@gmail.com"]

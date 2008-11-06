@@ -43,18 +43,35 @@ DEMO APP:
 	    "#{text}"
 	  end
 	  
-	  get "/time" do
-	    @now = Time.now
-	    erb :hello
-	  end
-	  
 	end
 
 	run app
 
-Run with `rackup demo.ru` and view it at `http://localhost:9292`.
+ERB SUPPORT:
+-------
+
+Nyane supports ERB, but you need to explicitly require it
+
+	require "rubygems"
+	require "nyane"
+	require "nyane/erb"
+	
+	app = Nyane.new do
+	  get "/" do
+	    erb :index
+	  end
+	end
+	
+	run app
 
 The views need to be at `views/`
+
+RUNNING THE APP:
+-------
+
+The app itself is a Rack config file, so, you can run with: `rackup demo.ru` and view it at `http://localhost:9292` or with Thin: `thin start -R demo.ru`
+
+The extension needs to be .ru (rack config file)
 
 MAINTAINER
 ----------
