@@ -1,7 +1,7 @@
 begin
-  require 'erubis'
+  require "erubis"
 rescue LoadError
-  require 'erb'
+  require "erb"
 end
 
 class Nyane
@@ -9,19 +9,15 @@ class Nyane
     path = build_template_path(template, :erb)
     if File.exists?(path)
       if Erubis
-        content = Erubis::Eruby.new(File.read(path)).src
+        content = Erubis::Eruby.new(File.read(path))
       else
-        content = ERB.new(File.read(path)).src
+        content = ERB.new(File.read(path))
       end
-      
-      eval(content)
+
+      eval(content.src)
     else
       @response.write  "Template not found"
       @response.status = 500
     end
-  end
-  
-  def build_template_path(name, renderer)
-    File.join(@root, "/views","/#{name.to_s}.#{renderer.to_s}")
   end
 end
