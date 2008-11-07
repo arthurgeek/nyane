@@ -14,9 +14,10 @@ class Nyane
         content = ERB.new(File.read(path)).src
       end
       
-      render_success eval(content)
+      eval(content)
     else
-      render_error 500, "Template not found"
+      @response.write  "Template not found"
+      @response.status = 500
     end
   end
   

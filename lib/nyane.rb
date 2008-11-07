@@ -1,4 +1,8 @@
+require "rack"
+
 class Nyane
+  
+  attr_reader :request, :response
   
   def initialize(&block)
     @actions = []
@@ -12,28 +16,21 @@ class Nyane
   end
   
   def call(env)
+    @request = Rack::Request.new(env)
+    @response = Rack::Response.new
+
     params = nil
     action = @actions.detect { |route, block| params = env["PATH_INFO"].match(Regexp.new("^#{route}$")) }
     
     if action
-      result = action.last.call *params[1..-1]
-      if result.is_a?(String)
-        render_success result
-      else
-        result
-      end
+      @response.write(action.last.call(*params[1..-1]))
     else
-      render_error
+      @response.write("Not found")
+      @response.status = 404
     end
+    
+    @response.finish
+    
   end
-  
-  private
-    def render_success(body,status_code=200,content_type='text/html')
-      [status_code, {'Content-type' => content_type}, body]
-    end
-
-    def render_error(error_code=404, error_message='Not found')
-      [error_code, {'Content-type' => 'text/plain'}, error_message]
-    end
   
 end
