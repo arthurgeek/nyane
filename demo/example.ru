@@ -17,6 +17,10 @@ app = Nyane.new do
     erb :time
   end
 
+  get "/welcome" do
+    erb :welcome, :layout => false
+  end
+
   get "/echo/(.*)" do |text|
     "#{text}"
   end

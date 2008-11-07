@@ -5,19 +5,24 @@ rescue LoadError
 end
 
 class Nyane
-  def erb(template)
-    path = build_template_path(template, :erb)
-    if File.exists?(path)
+  def erb(template, options={})
+    file = read_template_file(:erb, template)
+    layout = read_layout_file(:erb, options)
+
+    result = process(file)
+    result = process(layout) { result } if layout
+
+    result
+  end
+
+  private
+    def process(template)
       if Erubis
-        content = Erubis::Eruby.new(File.read(path))
+        body = Erubis::Eruby.new(template).src
       else
-        content = ERB.new(File.read(path))
+        body = ERB.new(template).src
       end
 
-      eval(content.src)
-    else
-      @response.write  "Template not found"
-      @response.status = 500
+      eval(body,binding)
     end
-  end
 end

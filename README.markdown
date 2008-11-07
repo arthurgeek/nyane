@@ -60,11 +60,16 @@ Nyane supports ERB, but you need to explicitly require it
 	  get "/" do
 	    erb :index
 	  end
+	  
+	  get "/foo" do
+	    erb :foo, :layout => false
+	  end
+	  
 	end
 	
 	run app
 
-The views need to be at `views/`
+The views need to be at `views/`. The layout used is `views/layout.erb`. To not render a layout, use `erb :template, :layout => false`. You can also tell which layout to use with `erb :template, :layout => :layout`
 
 RUNNING THE APP:
 -------
