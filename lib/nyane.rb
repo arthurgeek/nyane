@@ -20,7 +20,7 @@ class Nyane
     @response = Rack::Response.new
     
     params = nil
-    action = @actions.detect { |route, block| params = env["PATH_INFO"].match(Regexp.new("^#{route}$")) }
+    action = @actions.detect { |route, block| params = env["PATH_INFO"].match(Regexp.new("^\/?#{route}\/?$")) }
 
     if action
       @response.write(action.last.call(*params[1..-1]))
