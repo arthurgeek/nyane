@@ -69,7 +69,7 @@ Nyane supports ERB, but you need to explicitly require it
 	
 	run app
 
-The views need to be at `views/`. The layout used is `views/layout.erb`. To not render a layout, use `erb :template, :layout => false`. You can also tell which layout to use with `erb :template, :layout => :layout`
+The views need to be at `views/` or you can specify it with `app.views_directory = "directory_of_views"`. The layout used is `views/layout.erb`. To not render a layout, use `erb :template, :layout => false`. You can also tell which layout to use with `erb :template, :layout => :layout`
 
 RUNNING THE APP:
 -------
