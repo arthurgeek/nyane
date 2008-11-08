@@ -31,6 +31,7 @@ describe "routing" do
 
   it "should return 404 when no route" do
     @app.mock.get("/no-route").status.should == 404
+    @app.mock.get("/no-route").body.should == "Not found"
   end
 
   it "should route /path" do
