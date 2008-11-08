@@ -7,7 +7,7 @@ class Nyane
   def initialize(&block)
     @actions = []
     @root = File.dirname(eval("__FILE__", block.binding))
-    puts ">> Listening, CTRL+C to stop"
+    @app = self
     instance_eval(&block)
   end
 
