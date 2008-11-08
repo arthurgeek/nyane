@@ -4,7 +4,10 @@ rescue LoadError
   require "erb"
 end
 
+require "nyane/renderer"
+
 class Nyane
+
   def erb(template, options={})
     file = read_template_file(:erb, template)
     layout = read_layout_file(:erb, options)
