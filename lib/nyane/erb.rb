@@ -20,9 +20,15 @@ class Nyane
 
   private
     def process(template)
-      if Erubis
-        body = Erubis::Eruby.new(template).src
-      else
+      begin
+        if Erubis
+          body = Erubis::Eruby.new(template).src
+          erubis = true
+        end
+      rescue NameError
+        puts 'Erubis not present'
+      end
+      if !erubis
         body = ERB.new(template).src
       end
 
