@@ -18,7 +18,12 @@ class Nyane
   def post(route, &block)
     @actions << [route, :post, block]
   end
-  
+
+  def load(file)
+    path = File.join(@root, file) + ".rb"
+    eval(File.read(path), binding, path)
+  end
+
   def call(env)
     @request = Rack::Request.new(env)
     @response = Rack::Response.new
