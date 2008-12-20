@@ -12,18 +12,23 @@ class Nyane
   end
 
   def get(route, &block)
-    @actions << [route, block]
+    @actions << [route, :get, block]
   end
 
+  def post(route, &block)
+    @actions << [route, :post, block]
+  end
+  
   def call(env)
     @request = Rack::Request.new(env)
     @response = Rack::Response.new
     
-    params = nil
-    action = @actions.detect { |route, block| params = env["PATH_INFO"].match(Regexp.new("^\/?#{route}\/?$")) }
+    @params = @request.params
+    path_info = nil
+    action = @actions.detect { |route, method, block| @request.request_method == method.to_s.upcase! && path_info = @request.path_info.match(Regexp.new("^\/?#{route}\/?$")) }
 
     if action
-      @response.write(action.last.call(*params[1..-1]))
+      @response.write(action.last.call(path_info[1..-1]))
     else
       @response.write("Not found")
       @response.status = 404

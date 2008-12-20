@@ -21,3 +21,17 @@ describe "GET" do
     @app.mock.get("/text").body.should == "Text"
   end
 end
+
+describe "POST" do
+  before do
+    @app = Nyane.new do
+      post "/" do
+        "#{@params.inspect}"
+      end
+    end
+  end
+
+  it "should capture POST parameters" do
+    @app.mock.post("/", :input => "text=Nyane").body.should == { "text" => 'Nyane' }.inspect
+  end
+end

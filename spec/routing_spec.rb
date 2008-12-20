@@ -22,6 +22,10 @@ describe "routing" do
       get "/echo/(.*)" do |text|
         "#{text}"
       end
+      
+      post "/post" do
+        "post"
+      end
     end
   end
 
@@ -38,8 +42,12 @@ describe "routing" do
     @app.mock.get("/path").body.should == "/path"
   end
 
+  it "should route /post" do
+    @app.mock.post("/post").body.should == "post"
+  end
+
   it "should route /param/:param" do
-    @app.mock.get("/param/ohaie").body.should == "ohaie"
+    @app.mock.get("/param/hello").body.should == "hello"
   end
 
   it "should route with no leading slash" do    

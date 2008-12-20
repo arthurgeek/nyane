@@ -21,6 +21,11 @@ app = Nyane.new do
     erb :welcome, :layout => false
   end
 
+  post '/greeter' do
+    @name = @params["name"]
+    erb :greeter
+  end
+
   get "/echo/(.*)" do |text|
     "#{text}"
   end
