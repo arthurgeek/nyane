@@ -19,6 +19,11 @@ class Nyane
     @actions << [route, :post, block]
   end
 
+  def redirect_to(path)
+    @response.status = 302
+    @response.headers["Location"] = path
+  end
+
   def load(file)
     path = File.join(@root, file) + ".rb"
     eval(File.read(path), binding, path)

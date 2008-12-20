@@ -35,3 +35,24 @@ describe "POST" do
     @app.mock.post("/", :input => "text=Nyane").body.should == { "text" => 'Nyane' }.inspect
   end
 end
+
+describe "redirect" do
+  before do
+    @app = Nyane.new do
+      get "/" do
+        "/"
+      end
+      
+      get "/redirect" do
+        redirect_to "/"
+      end
+    end
+  end
+  
+  it "should redirect to path" do
+    response = @app.mock.get("/redirect")
+    response.status.should == 302
+    response.location.should == "/"
+    response.body.should == "/"
+  end
+end

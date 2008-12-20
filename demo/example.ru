@@ -12,6 +12,10 @@ app = Nyane.new do
     "Goodbye"
   end
 
+  get "/redirect" do
+    redirect_to "/"
+  end
+
   get "/time" do
     @now = Time.now
     erb :time
