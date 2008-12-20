@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.date = "Wed Nov 08 03:38:00 -0300 2008"
+  s.date = "Wed Dec 20 04:44:00 -0300 2008"
   s.authors = ["Arthur Zapparoli"]
   s.require_paths = ["lib"]
   s.required_rubygems_version = ">= 0"
@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
  "demo/views/time.erb",
  "demo/views/layout.erb",
  "demo/views/welcome.erb",
+ "demo/views/greeter.erb",
  "spec/app_spec.rb",
  "spec/erb_spec.rb",
  "spec/routing_spec.rb",
@@ -24,7 +25,7 @@ Gem::Specification.new do |s|
  "spec/fixtures/with_layout/text.erb",
  "spec/fixtures/without_layout/index.erb"]
   s.email = ["arthurzap@gmail.com"]
-  s.version = "0.0.3"
+  s.version = "0.0.4"
   s.homepage = "http://github.com/arthurgeek/nyane"
   s.name = "nyane"
   s.summary = "An insignificant rack-based framework"
